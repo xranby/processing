@@ -170,6 +170,7 @@ public class PSurfaceJOGL implements PSurface {
     if (profile == null) {
       if (PJOGL.profile == 2) {
         try {
+          // unsure why GL2ES1 (VC4 is a GLES2 part)
           profile = GLProfile.getGL2ES1();
         } catch (GLException ex) {
           profile = GLProfile.getMaxFixedFunc(true);
@@ -195,17 +196,25 @@ public class PSurfaceJOGL implements PSurface {
       } else throw new RuntimeException(PGL.UNSUPPORTED_GLPROF_ERROR);
     }
 
+    if (profile != null) {
+      System.out.println("Using profile "+profile.toString());
+    }
+
     // Setting up the desired capabilities;
     GLCapabilities caps = new GLCapabilities(profile);
     caps.setAlphaBits(PGL.REQUESTED_ALPHA_BITS);
+    // dp 24 (supported on VC4)
     caps.setDepthBits(PGL.REQUESTED_DEPTH_BITS);
+    // st 8 (not supported on VC4?)
     caps.setStencilBits(PGL.REQUESTED_STENCIL_BITS);
 
 //  caps.setPBuffer(false);
 //  caps.setFBO(false);
 
     pgl.reqNumSamples = PGL.smoothToSamples(graphics.smooth);
+    // sample-ext (not supported on VC4?)
     caps.setSampleBuffers(true);
+    // ms (not supported on VC4?)
     caps.setNumSamples(pgl.reqNumSamples);
     caps.setBackgroundOpaque(true);
     caps.setOnscreen(true);

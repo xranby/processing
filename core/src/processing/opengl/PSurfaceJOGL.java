@@ -323,7 +323,8 @@ public class PSurfaceJOGL implements PSurface {
                                     final GLAutoDrawable drawable,
                                     final Throwable cause) {
         synchronized (waitObject) {
-//        System.err.println("Caught exception: " + cause.getMessage());
+          // (try to get message for VC4)
+          System.err.println("Caught exception: " + cause.getMessage());
           drawException = cause;
           waitObject.notify();
         }
@@ -347,6 +348,7 @@ public class PSurfaceJOGL implements PSurface {
             } else if (cause instanceof RuntimeException) {
               throw (RuntimeException)cause;
             } else {
+              // (this is often being hit by VC4)
               throw new RuntimeException(cause);
             }
           }

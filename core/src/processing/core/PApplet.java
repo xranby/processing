@@ -10149,7 +10149,8 @@ public class PApplet implements PConstants {
       }
       surface.placePresent(stopColor);
     } else {
-      surface.placeWindow(location, editorLocation);
+      // VC4 often hits a 5 sec timeout here, disable for now
+      //surface.placeWindow(location, editorLocation);
     }
 
     // not always running externally when in present mode

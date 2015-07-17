@@ -29,7 +29,7 @@ import com.jogamp.newt.event.InputEvent;
 //import com.jogamp.newt.event.WindowAdapter;
 //import com.jogamp.newt.event.WindowEvent;
 import com.jogamp.newt.opengl.GLWindow;
-import com.jogamp.opengl.util.FPSAnimator;
+import com.jogamp.opengl.util.Animator;
 
 import processing.core.PApplet;
 import processing.core.PConstants;
@@ -48,7 +48,7 @@ public class PSurfaceJOGL implements PSurface {
   PJOGL pgl;
 
   GLWindow window;
-  FPSAnimator animator;
+  Animator animator;
   Rectangle screenRect;
 
   PApplet sketch;
@@ -314,8 +314,9 @@ public class PSurfaceJOGL implements PSurface {
 
   protected void initAnimator() {
 //  System.err.println("1. create animator");
-    animator = new FPSAnimator(window, 60);
+    animator = new Animator(window);
     drawException = null;
+    
     animator.setUncaughtExceptionHandler(new GLAnimatorControl.UncaughtExceptionHandler() {
       @Override
       public void uncaughtException(final GLAnimatorControl animator,
@@ -366,6 +367,7 @@ public class PSurfaceJOGL implements PSurface {
   @Override
   public void setVisible(boolean visible) {
     window.setVisible(visible);
+    animator.start();
   }
 
 
@@ -614,10 +616,10 @@ public class PSurfaceJOGL implements PSurface {
 
   public void setFrameRate(float fps) {
     if (animator != null) {
-      animator.stop();
-      animator.setFPS((int)fps);
+      //animator.stop();
+      //animator.setFPS((int)fps);
       pgl.setFps(fps);
-      animator.start();
+      //animator.start();
     }
   }
 

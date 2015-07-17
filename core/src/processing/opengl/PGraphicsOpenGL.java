@@ -6978,9 +6978,9 @@ public class PGraphicsOpenGL extends PGraphics {
     if (smooth < 1) {
       pgl.disable(PGL.MULTISAMPLE);
     } else {
-      pgl.enable(PGL.MULTISAMPLE);
+      //pgl.enable(PGL.MULTISAMPLE);
     }
-    pgl.disable(PGL.POLYGON_SMOOTH);
+    //pgl.disable(PGL.POLYGON_SMOOTH);
 
     if (sized) {
 //      reapplySettings();
@@ -7090,8 +7090,8 @@ public class PGraphicsOpenGL extends PGraphics {
     pgl.getIntegerv(PGL.MAX_TEXTURE_SIZE, intBuffer);
     maxTextureSize = intBuffer.get(0);
 
-    pgl.getIntegerv(PGL.MAX_SAMPLES, intBuffer);
-    maxSamples = intBuffer.get(0);
+    //pgl.getIntegerv(PGL.MAX_SAMPLES, intBuffer);
+    //maxSamples = intBuffer.get(0);
 
     if (anisoSamplingSupported) {
       pgl.getFloatv(PGL.MAX_TEXTURE_MAX_ANISOTROPY, floatBuffer);

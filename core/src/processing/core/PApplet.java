@@ -923,7 +923,8 @@ public class PApplet implements PConstants {
       System.err.println("  " + method + "(" + argList.join(", ") + ");");
       System.err.println("}");
     }
-    throw new IllegalStateException(method + "() cannot be used here, see " + url);
+    //throw new IllegalStateException(method + "() cannot be used here, see " + url);
+    return true;
   }
 
 

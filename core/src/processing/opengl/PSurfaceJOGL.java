@@ -170,8 +170,7 @@ public class PSurfaceJOGL implements PSurface {
     if (profile == null) {
       if (PJOGL.profile == 2) {
         try {
-          // unsure why GL2ES1 (VC4 is a GLES2 part)
-          profile = GLProfile.getGL2ES1();
+          profile = GLProfile.getGL2ES2();
         } catch (GLException ex) {
           profile = GLProfile.getMaxFixedFunc(true);
         }
